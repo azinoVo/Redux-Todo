@@ -65,13 +65,12 @@ class ToDoList extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
+    // console.log(state);
     // todo below is the same as the todo in this.props.todo.map() from the render above
     // this allows the todo to be available from state to be used as props here
     // the reducer in the store returned the state to be used when we are connected
     return {
         todo: state.todo,
-        saved: state.saved
     }
 }
 

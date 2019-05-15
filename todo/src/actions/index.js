@@ -29,3 +29,12 @@ export const saveTask = name => {
 
     };
 };
+
+export const DELETE_RANDOM = "DELETE_RANDOM";
+export const deleteRandom = id => {
+    return {
+        type: DELETE_RANDOM,
+        payload:id
+
+    };
+};

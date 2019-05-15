@@ -1,5 +1,5 @@
 // import action constants here
-import { ADD_ITEM, FINISH_TASK, DELETE_TASK, SAVE_TASK } from '../actions';
+import { ADD_ITEM, FINISH_TASK, DELETE_TASK, SAVE_TASK, DELETE_RANDOM } from '../actions';
 
 
 const initialList = {
@@ -9,8 +9,10 @@ const initialList = {
     ],
 
     saved: [
-        { name: "Saved for Later", completed: false, id: "100"}
-    ]
+        { name: "Saved for Later", completed: false, id: "0a"}
+    ],
+    count: [0]
+
 }
 
 
@@ -54,7 +56,17 @@ function reducer(state = initialList, action) {
                 todo: state.todo.filter(task => {
                     return task.name !== action.payload
                 }),
-                saved: [...state.saved, {name: `${action.payload}`, completed: false, id: `${state.saved.length}`}]
+                saved: [...state.saved, {name: `${action.payload}`, completed: false, id: `${state.saved.length}a`}],
+                count: [...state.count, state.count.length]
+            }
+
+            case DELETE_RANDOM:
+            console.log(action.payload)
+            return {
+                ...state,
+                saved: state.saved.filter(task => {
+                    return `${task.id}` !== `${action.payload}a`
+                })
             }
 
         default:

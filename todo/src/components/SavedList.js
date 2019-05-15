@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {deleteRandom} from '../actions'
 
 class savedList extends Component {
     constructor() {
         super();
         this.state = {
+            attempt: 0
         }
+    }
+
+    
+    deleteRandom = id => {
+        this.props.deleteRandom(id)
+        this.setState({attempt: this.state.attempt + 1})
+
     }
 
     render() {
@@ -20,6 +29,8 @@ class savedList extends Component {
                         </h4>
                     })}
                 </div>
+                <button onClick={() => this.deleteRandom(Math.round(Math.random() * this.props.count.length))}>Chum the Waters</button>
+                <div>Attempts: {this.state.attempt}</div>
             </React.Fragment>
 
         );
@@ -32,8 +43,9 @@ const mapStateToProps = state => {
     // this allows the todo to be available from state to be used as props here
     // the reducer in the store returned the state to be used when we are connected
     return {
-        saved: state.saved
+        saved: state.saved,
+        count: state.count
     }
 }
 
-export default connect(mapStateToProps, {})(savedList);
+export default connect(mapStateToProps, {deleteRandom})(savedList);
