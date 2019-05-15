@@ -20,3 +20,12 @@ export const deleteTask = () => {
         type: DELETE_TASK,
     };
 };
+
+export const SAVE_TASK = "SAVE_TASK";
+export const saveTask = name => {
+    return {
+        type: SAVE_TASK,
+        payload:name
+
+    };
+};

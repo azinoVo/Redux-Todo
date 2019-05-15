@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask, finishTask, deleteTask } from '../actions'
+import { addTask, finishTask, deleteTask, saveTask } from '../actions'
 
 class ToDoList extends Component {
     constructor() {
@@ -32,14 +32,19 @@ class ToDoList extends Component {
         this.props.deleteTask()
     }
 
+    save = name => {
+        this.props.saveTask(name)
+    }
+
     render() {
         
         return (
             <React.Fragment>
+                <h1>To-Do List</h1>
                 <div className='todo-list'>
                     {this.props.todo && this.props.todo.map(todo => {
                         return <h4 className={`${todo.completed}`} key={todo.id} onClick={() => this.finish(todo.id)}>
-                            {todo.name}
+                            {todo.name} <button onClick={() => this.save(todo.name)}>Save</button>
                         </h4>
                     })}
                 </div>
@@ -52,7 +57,7 @@ class ToDoList extends Component {
                     />
                     <button onClick={this.addTask}>Add to List</button>
                 </form>
-                <button onClick={this.delete}>Delete Completed</button>
+                <button onClick={this.delete}>Delete All Selected</button>
             </React.Fragment>
 
         );
@@ -65,8 +70,9 @@ const mapStateToProps = state => {
     // this allows the todo to be available from state to be used as props here
     // the reducer in the store returned the state to be used when we are connected
     return {
-        todo: state.todo
+        todo: state.todo,
+        saved: state.saved
     }
 }
 
-export default connect(mapStateToProps, { addTask, finishTask, deleteTask })(ToDoList);
+export default connect(mapStateToProps, { addTask, finishTask, deleteTask, saveTask })(ToDoList);

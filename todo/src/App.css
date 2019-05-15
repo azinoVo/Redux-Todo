@@ -1,3 +1,7 @@
 .true {
-    text-decoration:line-through;
+    background-color:lightblue;
+}
+
+h1 {
+    text-decoration:underline;
 }
