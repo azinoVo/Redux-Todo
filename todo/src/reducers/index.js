@@ -11,7 +11,8 @@ const initialList = {
     saved: [
         { name: "Polish Old Shoes", completed: false, id: "0a"}
     ],
-    count: [0]
+    count: [0],
+    health: 100
 
 }
 
@@ -47,7 +48,8 @@ function reducer(state = initialList, action) {
                 ...state,
                 todo: state.todo.filter(task => {
                     return task.completed === false
-                })
+                }),
+                health: state.health + 10
             }
 
             case SAVE_TASK:
@@ -58,6 +60,7 @@ function reducer(state = initialList, action) {
                 }),
                 saved: [...state.saved, {name: `${action.payload}`, completed: false, id: `${state.saved.length}a`}],
                 count: [...state.count, state.count.length]
+                
             }
 
             case DELETE_RANDOM:
@@ -66,7 +69,8 @@ function reducer(state = initialList, action) {
                 ...state,
                 saved: state.saved.filter(task => {
                     return `${task.id}` !== `${action.payload}a`
-                })
+                }),
+                health: state.health - 5
             }
 
             case SALVAGE_ITEM:

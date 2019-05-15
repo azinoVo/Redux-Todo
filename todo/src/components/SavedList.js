@@ -6,7 +6,6 @@ class savedList extends Component {
     constructor() {
         super();
         this.state = {
-            health: 100,
             kraken: "Your Kraken looks very happy."
         }
     }
@@ -14,23 +13,22 @@ class savedList extends Component {
     
     deleteRandom = id => {
         this.props.deleteRandom(id)
-        this.setState({health: this.state.health - 5});
-        if (this.state.health === 90){
+        if (this.props.health === 90){
             this.setState({kraken:"Your Kraken looks upset."})}
         
-        if (this.state.health === 70){
+        if (this.props.health === 70){
             this.setState({kraken:"Your Kraken looks pale."})}
     
-        if (this.state.health === 50){
+        if (this.props.health === 50){
             this.setState({kraken:"Your Kraken just threw up."})}
 
-        if (this.state.health === 30){
+        if (this.props.health === 30){
             this.setState({kraken:"Your Kraken doesn't look too good."})}
 
-        if (this.state.health === 20){
+        if (this.props.health === 20){
             this.setState({kraken:"Your Kraken looks unresponsive."})}
 
-        if (this.state.health === 5){
+        if (this.props.health === 5){
             this.setState({kraken:"Your Kraken has died."})
             alert("Your Kraken has died. If you did your chores, Krakkie would still be alive.");
             window.location.reload();
@@ -46,15 +44,15 @@ class savedList extends Component {
         return (
             <React.Fragment>
                 <h1>Davy Jones' Locker</h1>
-                <ul className='saved'>
+                <div className='saved'>
                 {this.props.saved && this.props.saved.map(saved => {
-                        return <li key={saved.id}>
+                        return <h4 key={saved.id}>
                             {saved.name} <i class="fas fa-anchor" onClick={() => this.salvage(saved.name)}></i>
-                        </li>
+                        </h4>
                     })}
-                </ul>
+                </div>
                 <button onClick={() => this.deleteRandom(Math.round(Math.random() * this.props.count.length))}>Feed the Kraken! </button>
-                <p>Kraken HP: {this.state.health}</p>
+                <p>Kraken HP: {this.props.health}</p>
                 <p>{this.state.kraken}</p>
             </React.Fragment>
 
@@ -70,7 +68,8 @@ const mapStateToProps = state => {
     // the reducer in the store returned the state to be used when we are connected
     return {
         saved: state.saved,
-        count: state.count
+        count: state.count,
+        health: state.health
     }
 }
 
