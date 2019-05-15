@@ -1,41 +1,67 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {deleteRandom} from '../actions'
+import {deleteRandom, salvageItem} from '../actions'
 
 class savedList extends Component {
     constructor() {
         super();
         this.state = {
-            attempt: 0
+            health: 100,
+            kraken: "Your Kraken looks very happy."
         }
     }
 
     
     deleteRandom = id => {
         this.props.deleteRandom(id)
-        this.setState({attempt: this.state.attempt + 1})
+        this.setState({health: this.state.health - 5});
+        if (this.state.health === 90){
+            this.setState({kraken:"Your Kraken looks upset."})}
+        
+        if (this.state.health === 70){
+            this.setState({kraken:"Your Kraken looks pale."})}
+    
+        if (this.state.health === 50){
+            this.setState({kraken:"Your Kraken just threw up."})}
 
+        if (this.state.health === 30){
+            this.setState({kraken:"Your Kraken doesn't look too good."})}
+
+        if (this.state.health === 20){
+            this.setState({kraken:"Your Kraken looks unresponsive."})}
+
+        if (this.state.health === 5){
+            this.setState({kraken:"Your Kraken has died."})
+            alert("Your Kraken has died. If you did your chores, Krakkie would still be alive.");
+            window.location.reload();
+        }
+    }
+
+    salvage = name => {
+        this.props.salvageItem(name)
     }
 
     render() {
         
         return (
             <React.Fragment>
-                <h1>Procrastination Pool</h1>
-                <div className='saved'>
+                <h1>Davy Jones' Locker</h1>
+                <ul className='saved'>
                 {this.props.saved && this.props.saved.map(saved => {
-                        return <h4 key={saved.id}>
-                            {saved.name}
-                        </h4>
+                        return <li key={saved.id}>
+                            {saved.name} <i class="fas fa-anchor" onClick={() => this.salvage(saved.name)}></i>
+                        </li>
                     })}
-                </div>
-                <button onClick={() => this.deleteRandom(Math.round(Math.random() * this.props.count.length))}>Chum the Waters</button>
-                <div>Attempts: {this.state.attempt}</div>
+                </ul>
+                <button onClick={() => this.deleteRandom(Math.round(Math.random() * this.props.count.length))}>Feed the Kraken! </button>
+                <div>Kraken HP: {this.state.health}</div>
+                <p>{this.state.kraken}</p>
             </React.Fragment>
 
         );
     }
 }
+
 
 const mapStateToProps = state => {
     console.log(state);
@@ -48,4 +74,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {deleteRandom})(savedList);
+export default connect(mapStateToProps, {deleteRandom, salvageItem})(savedList);

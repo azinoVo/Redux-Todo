@@ -38,3 +38,12 @@ export const deleteRandom = id => {
 
     };
 };
+
+export const SALVAGE_ITEM = "SALVAGE_ITEM";
+export const salvageItem = name => {
+    return {
+        type: SALVAGE_ITEM,
+        payload:name
+
+    };
+};

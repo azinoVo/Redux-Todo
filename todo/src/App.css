@@ -1,5 +1,23 @@
+.App {
+    max-width:500px;
+    height:auto;
+    margin:20px 0 0 200px;
+    border:1px solid black;
+    padding:2%;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    background-image: url("../src/components/water.jpeg");
+}
+
+ul li {
+    padding:2%;
+    width:100%;
+}
+
 .true {
-    text-decoration:line-through;
+    background-color:white;
 }
 
 h1 {

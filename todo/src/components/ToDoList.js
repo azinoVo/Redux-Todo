@@ -40,14 +40,15 @@ class ToDoList extends Component {
         
         return (
             <React.Fragment>
-                <h1>To-Do List</h1>
-                <div className='todo-list'>
+                <h1>Davy Jones' List</h1>
+                <ul className='todo-list'>
                     {this.props.todo && this.props.todo.map(todo => {
-                        return <h4 className={`${todo.completed}`} key={todo.id} onClick={() => this.finish(todo.id)}>
-                            {todo.name} <button onClick={() => this.save(todo.name)}>Save</button>
-                        </h4>
+                        return <li className={`${todo.completed}`} key={todo.id} onClick={() => this.finish(todo.id)}>
+                            {todo.name} <i class="fas fa-fish" onClick={() => this.save(todo.name)}></i>
+                            
+                        </li>
                     })}
-                </div>
+                </ul>
                 <form onSubmit={this.addTask}>
                     <input
                         type="text"
@@ -55,9 +56,9 @@ class ToDoList extends Component {
                         onChange={this.handleChanges}
                         placeholder="...task"
                     />
-                    <button onClick={this.addTask}>Add to List</button>
+                    <i class="fas fa-plus-square" onClick={this.addTask}></i>
                 </form>
-                <button onClick={this.delete}>Delete All Selected</button>
+                <button onClick={this.delete}>Remove Finished</button>
             </React.Fragment>
 
         );
