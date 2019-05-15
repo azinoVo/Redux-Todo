@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask } from '../actions'
+import { addTask, finishTask } from '../actions'
 
 class ToDoList extends Component {
     constructor() {
@@ -21,14 +21,22 @@ class ToDoList extends Component {
         event.preventDefault();
         // this.state.newToDo is the payload for the addTask function
         this.props.addTask(this.state.newToDo)
+        this.setState({newToDo: ''})
+    }
+
+    finish = id => {
+        this.props.finishTask(id)
     }
 
     render() {
+        
         return (
             <React.Fragment>
                 <div className='todo-list'>
-                    {this.props.todo.map(todo => {
-                        return <div key={todo.id}>{todo.name}</div>
+                    {this.props.todo && this.props.todo.map(todo => {
+                        return <h4 className={`${todo.completed}`} key={todo.id} onClick={() => this.finish(todo.id)}>
+                            {todo.name}
+                        </h4>
                     })}
                 </div>
                 <form onSubmit={this.addTask}>
@@ -56,4 +64,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {addTask})(ToDoList);
+export default connect(mapStateToProps, { addTask, finishTask })(ToDoList);

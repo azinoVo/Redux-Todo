@@ -5,3 +5,11 @@ export const addTask = newTask => {
         payload: newTask
     };
 };
+
+export const FINISH_TASK = "FINISH_TASK";
+export const finishTask = id => {
+    return {
+        type: FINISH_TASK,
+        payload:id
+    };
+};
