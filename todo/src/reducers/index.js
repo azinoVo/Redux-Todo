@@ -5,7 +5,7 @@ import { ADD_ITEM, FINISH_TASK, DELETE_TASK, SAVE_TASK, DELETE_RANDOM, SALVAGE_I
 const initialList = {
     todo: [
         { name: "Do Laundry", completed: false, id: "0" },
-        { name: "Buy Grocery", completed: false, id: "1" }
+        { name: "Take Kraken for Swim", completed: false, id: "1" }
     ],
 
     saved: [

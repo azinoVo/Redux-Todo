@@ -14,6 +14,12 @@
 ul li {
     padding:2%;
     width:100%;
+    color:white;
+}
+
+p {
+    color:purple;
+    background-color:black;
 }
 
 .true {

@@ -54,7 +54,7 @@ class savedList extends Component {
                     })}
                 </ul>
                 <button onClick={() => this.deleteRandom(Math.round(Math.random() * this.props.count.length))}>Feed the Kraken! </button>
-                <div>Kraken HP: {this.state.health}</div>
+                <p>Kraken HP: {this.state.health}</p>
                 <p>{this.state.kraken}</p>
             </React.Fragment>
 
