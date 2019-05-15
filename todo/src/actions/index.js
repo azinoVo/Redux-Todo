@@ -13,3 +13,10 @@ export const finishTask = id => {
         payload:id
     };
 };
+
+export const DELETE_TASK = "DELETE_TASK";
+export const deleteTask = () => {
+    return {
+        type: DELETE_TASK,
+    };
+};

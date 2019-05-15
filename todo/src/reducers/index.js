@@ -1,5 +1,5 @@
 // import action constants here
-import { ADD_ITEM, FINISH_TASK } from '../actions';
+import { ADD_ITEM, FINISH_TASK, DELETE_TASK } from '../actions';
 
 
 const initialList = {
@@ -33,6 +33,14 @@ function reducer(state = initialList, action) {
                         }
                     }
                     return task;
+                })
+            }
+
+            case DELETE_TASK:
+            return {
+                ...state,
+                todo: state.todo.filter(task => {
+                    return task.completed === false
                 })
             }
 

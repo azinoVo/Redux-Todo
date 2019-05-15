@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask, finishTask } from '../actions'
+import { addTask, finishTask, deleteTask } from '../actions'
 
 class ToDoList extends Component {
     constructor() {
@@ -28,6 +28,10 @@ class ToDoList extends Component {
         this.props.finishTask(id)
     }
 
+    delete = () => {
+        this.props.deleteTask()
+    }
+
     render() {
         
         return (
@@ -48,6 +52,7 @@ class ToDoList extends Component {
                     />
                     <button onClick={this.addTask}>Add to List</button>
                 </form>
+                <button onClick={this.delete}>Delete Completed</button>
             </React.Fragment>
 
         );
@@ -64,4 +69,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { addTask, finishTask })(ToDoList);
+export default connect(mapStateToProps, { addTask, finishTask, deleteTask })(ToDoList);
